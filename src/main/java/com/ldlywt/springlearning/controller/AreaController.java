@@ -27,9 +27,14 @@ public class AreaController {
         return Result.SuccResult(areaService.getAreaList());
     }
 
+    /**
+     *
+     * 如果加了@RequestParam : ?后面必须跟(@RequestParam Integer areaId)括号中的areaId,如：http://localhost:8088/ldlywt/area/getareabyid?areaId=2
+     * 如果是(Integer id) 拼接是http://localhost:8088/ldlywt/area/getareabyid?id=2
+     */
     @GetMapping(value = "/getareabyid")
-    private Result getAreaById(Integer id){
-        return Result.SuccResult(areaService.getAreaById(id));
+    private Result getAreaById(@RequestParam Integer areaId){
+        return Result.SuccResult(areaService.getAreaById(areaId));
     }
 
     @PostMapping(value = "/addarea")
@@ -42,7 +47,7 @@ public class AreaController {
         return Result.SuccResult(areaService.modifyArea(area));
     }
 
-    @RequestMapping(value = "/removeArea")
+    @GetMapping(value = "/removeArea")
     private Result removeArea(Integer id){
         return Result.SuccResult(areaService.deleteArea(id));
     }
