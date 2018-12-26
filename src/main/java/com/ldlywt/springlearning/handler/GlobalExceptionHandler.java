@@ -1,5 +1,6 @@
 package com.ldlywt.springlearning.handler;
 
+import com.ldlywt.springlearning.entity.Result;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,11 +20,8 @@ public class GlobalExceptionHandler {
 
 	@ExceptionHandler(value = Exception.class)
 	@ResponseBody
-	public Map<String, Object> exceptionHandler(HttpServletRequest req, Exception e) throws Exception {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		modelMap.put("success", false);
-		modelMap.put("errMsg", e.getMessage());
-		return modelMap;
+	public Result<Object> exceptionHandler(HttpServletRequest req, Exception e) throws Exception {
+		return Result.FailedResult(e.getMessage());
 	}
 
 }
